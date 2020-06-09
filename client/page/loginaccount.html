@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>注册您的账号</title>
+
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/loginaccount.css" rel="stylesheet">
+         <!-- 支持响应式布局 -->
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <header>
+            <div class="jumbotron">
+                <p class="lead">按要求完成注册以获得您的账号</p>
+                <hr class="my-4">
+                <a class="btn btn-primary btn-md" href="/index">返回首页</a>
+            </div>
+           
+        </header>
+
+        <div class="container-fluid">
+            <div class="row input-group mb-3 logincomponent">
+                <div class="col-0 col-md-4"></div>
+                <div class="col-12 col-md-4">
+                    <div class="row">
+                        <span class="input-group-text">
+                            账号:
+                        </span>
+                    </div>
+                    <div class="row">
+                        <input type="text" class="form-control" id="userid" placeholder="输入您想注册的账号">  
+                    </div>
+                </div>        
+                 <div class="col-0 col-md-4">
+                    <div class="row d-none d-md-block">
+                        <p>&nbsp;</p>   
+                    </div>
+                    <div class="row">
+                       <p></p>
+                   </div>
+                </div>
+                
+            </div>
+            
+            <div class="row input-group mb-3 logincomponent">
+                <div class="col-0 col-md-4"></div>
+                <div class="col-12 col-md-4">
+                    <div class="row">
+                        <span class="input-group-text" >
+                            密码:
+                        </span>
+                    </div>
+                    <div class="row">
+                        <input type="password" class="form-control" id="userpassword" placeholder="输入您的密码">
+                    </div>
+                    
+                </div>
+                <div class="col-0 col-md-4">
+                    <div class="row d-none d-md-block">
+                        <p>&nbsp;</p>   
+                    </div>
+                    <div class="row">
+                       <p></p>
+                   </div>
+                </div>
+            </div>
+            
+            <div class="row input-group mb-3 logincomponent">
+                <div class="col-0 col-md-4"></div>
+                <div class="col-12 col-md-4">
+                    <div class="row">
+                        <span class="input-group-text">
+                            确认密码:
+                        </span>
+                    </div>
+                    <div class="row">
+                        <input type="password" class="form-control" id="userconfirmpassword" placeholder="确认您的密码">
+                    </div>
+                    
+                </div>
+                <div class="col-0 col-md-4">
+                    <div class="row d-none d-md-block">
+                        <p>&nbsp;</p>   
+                    </div>
+                    <div class="row">
+                       <p></p>
+                   </div>
+                </div>
+            </div>
+
+            <div class="row input-group mb-3 logincomponent">
+                <div class="col-0 col-md-4"></div>
+                <div class="col-12 col-md-4">
+                    <div class="row">
+                        <label for="loginquestion" class="input-group-text">密保问题:</label>
+                    </div>
+                    <div class="row">
+                        <select id="loginquestion" class="custom-select">
+                            <option value="disabledquestion" selected>选择您的密保问题</option>
+                            <option value="lovername">您爱人的名字</option>
+                            <option value="fathername">您父亲的名字</option>
+                            <option value="mothername">您母亲的名字</option>
+                            <option value="favouritemovie">您最喜欢的电影</option>
+                            <option value="yourprimaryschool">您所就读的小学</option>
+                        </select>
+                    </div>
+                        
+                </div>
+                <div class="col-0 col-md-4">
+                    <div class="row d-none d-md-block">
+                        <p>&nbsp;</p>   
+                    </div>
+                    <div class="row">
+                       <p></p>
+                   </div>
+                </div>
+            </div>
+
+            
+            <div class="row input-group mb-3 logincomponent">
+                <div class="col-sm-0 col-md-4"></div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="row">
+                        <span class="input-group-text">密保问题答案:</span>
+                    </div>
+                    <div class="row">
+                        <input type="text" id="loginanswer" class="form-control" placeholder="请输入密保问题答案" aria-label="loginanswer">
+                    </div>
+                    
+                </div>
+                <div class="col-sm-0 col-md-4">
+                    <div class="row d-none d-md-block">
+                        <p>&nbsp;</p>   
+                    </div>
+                    <div class="row">
+                       <p></p>
+                   </div>
+                </div>
+            </div>
+
+            <div class="row input-group mb-3 logincomponent">
+                <div class="col-sm-0 col-md-4"></div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="row">
+                        <input class="btn btn-primary btn-md btn-block" id="submitlogininfo" type="submit" value="提交信息">
+                    </div>
+                    
+                </div>
+                <div class="col-sm-0 col-md-4"></div>
+            </div>    
+        </div>
+        <footer>
+
+        </footer>
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script>
+
+             $("#submitlogininfo").click(function() {
+                if($("#userid").val()!='' &&  $("#userpassword").val()!='' && $("#userconfirmpassword").val() && $("#loginquestion").val()!='' && $("#loginanswer").val()){
+                        if($("#userpassword").val()==$("#userconfirmpassword").val()){
+                            let formObject = {};
+                            formObject["userid"] = $("#userid").val();
+                            formObject["userpassword"] = $("#userpassword").val();
+                            formObject["userconfirmpassword"] = $("#userconfirmpassword").val();
+                            formObject["loginquestion"] = $("#loginquestion").val();
+                            formObject["loginanswer"] = $("#loginanswer").val();
+    
+                            $.ajax({
+                                url:"submitLoginInfo",
+                                type:"post",
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify(formObject),
+                                dataType: "json",
+                                success:function(data){
+                                    if(data.isValid){
+                                        alert("注册成功，即将跳转至主页");
+                                        window.open("/","_self");
+                                    }else{
+                                        alert("账号已注册");
+                                    }
+                                },
+                                error:function(e){
+                                    alert("表单提交出现错误");
+                                }
+                            });
+                        }
+                        else{
+                            alert("两次输入密码不一致");
+                        }
+                }
+                else{
+                    alert("请输入全部信息后再提交");
+                }
+
+            });
+        </script>
+
+    </body>
+
+</html>

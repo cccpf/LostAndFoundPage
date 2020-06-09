@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/myCollection.css" rel="stylesheet">
+        
+        <!-- 支持响应式布局 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    </head>
+    <body>
+        <header>
+            <div class="container-fluid">
+                <ul class="nav nav-tabs">
+                
+                    <div class="col-3 col-md-2">
+                        <li class="nav-item">
+                            <a class="nav-link" id="myPage" href="index">
+                                我的主页
+                            </a>
+                        </li>
+                    </div>
+            
+                    <div class="col-3 col-md-2">
+                        <li class="nav-item">
+                            <a class="nav-link" id="myCollection" href="#">
+                                我的收藏
+                            </a>
+                        </li>
+                    </div>
+                    
+                    <div class="col-3 col-md-2">
+                        <li class="nav-item">
+                            <a class="nav-link" id="submitNotice" href="#">
+                                我要求助
+                            </a>
+                        </li>
+                    </div>
+                    <div class="col-md-4 d-none d-md-block"></div>
+            
+                    <div class="col-3 col-md-2">
+                        <li class="nav-item">
+                            <a class="nav-link" id="selfCenter" href="#">
+                                个人中心
+                            </a>
+                        </li>
+                    
+                    </div>
+                </ul>     
+            </div>
+        </header>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-4 col-md-5"></div>
+                <div class="col-4 col-md-2">
+                    <h2>我的对话</h2>
+                </div>
+                <div class="col-4 col-md-5"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col col-md-6">
+                    <div class="card">
+                        <ul class="list-group list-group-flush">
+                            {myconversation}
+                        </ul>
+                      </div>
+                </div>
+                <div class="col-md-3"></div>
+                
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-4 col-md-5"></div>
+                <div class="col-4 col-md-2">
+                    <h2>我的求助</h2>
+                </div>
+                <div class="col-4 col-md-5"></div>
+            </div>
+            {mysubmit}
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-4 col-md-5"></div>
+                <div class="col-4 col-md-2">
+                    <h2>我的收藏</h2>
+                </div>
+                <div class="col-4 col-md-5"></div>
+            </div>
+            {mycollection}
+        </div>
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script>
+            let userPageUrl=/.*?id=.*psw=.*\//.exec($(location).attr("href"));
+           
+            document.getElementById('myPage').href=userPageUrl.toString().slice(0,userPageUrl.toString().length-1);
+            document.getElementById('myCollection').href=userPageUrl+"myCollection.html";
+            document.getElementById('submitNotice').href=userPageUrl+"submitNotice.html";
+            document.getElementById('selfCenter').href=userPageUrl+"selfCenter.html";
+           
+        </script>
+    
+    </body>
+
+</html>

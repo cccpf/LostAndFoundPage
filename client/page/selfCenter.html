@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/selfCenter.css" rel="stylesheet">
+        <link href="css/fileinput.css" rel="stylesheet">
+
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/fileinput.js"></script>
+
+        <script src="js/bootstrap.bundle.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
+        <link href="css/fileinput/explorer-fas/theme.css" media="all" rel="stylesheet" type="text/css"/>
+        <script src="js/fileinput/js/plugins/piexif.js" type="text/javascript"></script>
+        <script src="js/fileinput/js/plugins/sortable.js" type="text/javascript"></script>
+        <script src="js/fileinput/js/locales/fr.js" type="text/javascript"></script>
+        <script src="js/fileinput/js/locales/es.js" type="text/javascript"></script>
+        <script src="js/fileinput/fas/theme.js" type="text/javascript"></script>
+        <script src="js/fileinput/explorer-fas/theme.js" type="text/javascript"></script>
+        <!-- 支持响应式布局 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    </head>
+    <body>
+        <header>
+            <div class="container-fluid">
+                <ul class="nav nav-tabs">
+                
+                    <div class="col-3 col-md-2">
+                        <li class="nav-item">
+                            <a class="nav-link" id="myPage" href="#">
+                                我的主页
+                            </a>
+                        </li>
+                    </div>
+            
+                    <div class="col-3 col-md-2">
+                        <li class="nav-item">
+                            <a class="nav-link" id="myCollection" href="#">
+                                我的收藏
+                            </a>
+                        </li>
+                    </div>
+                    
+                    <div class="col-3 col-md-2">
+                        <li class="nav-item">
+                            <a class="nav-link" id="submitNotice" href="#">
+                                我要求助
+                            </a>
+                        </li>
+                    </div>
+                    <div class="col-md-4 d-none d-md-block"></div>
+            
+                    <div class="col-3 col-md-2">
+                        <li class="nav-item">
+                            <a class="nav-link" id="selfCenter" href="#">
+                                个人中心
+                            </a>
+                        </li>
+                    
+                    </div>
+                </ul>     
+            </div>
+        </header>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-1  col-md-4">
+
+                </div>
+                <div class="col-10 col-md-4">
+                            <div class="row inputcomponent">
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                
+                                    <label class="btn btn-primary active">
+                                        <input type="radio" name="options" id="updateinfomodel" checked> 我要更新个人信息
+                                    </label>
+                                    <label class="btn btn-info">
+                                        <input type="radio" name="options" id="updatepswmodel"> 我要修改密码
+                                    </label>
+                                    <label class="btn btn-success">
+                                        <input type="radio" name="options" id="updateuserimgmodel"> 我要设置头像
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="row inputcomponent input-group mb-3" id="idgroup">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">账号</span>
+                                </div>
+                                <input type="text" id="userid" class="form-control" value="{id}" disabled>
+                               
+                            </div>
+                            <div class="row inputcomponent input-group mb-3" id="pswgroup">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">密码</span>
+                                </div>
+                                <input type="password" id="userpassword" class="form-control">
+                               
+                            </div>
+                            <div class="row inputcomponent input-group mb-3 d-none" id="oldpswgroup">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">原密码</span>
+                                </div>
+                                <input type="password" id="useroldpassword" class="form-control">
+                               
+                            </div>
+                            <div class="row inputcomponent input-group mb-3 d-none" id="newpswgroup">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">新密码</span>
+                                </div>
+                                <input type="password" id="usernewpassword" class="form-control">
+                               
+                            </div>
+                            <div class="row inputcomponent input-group mb-3" id="namegroup">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">姓名</span>
+                                </div>
+                                <input type="text" id="username" class="form-control" value="{name}">
+                               
+                            </div>
+                            <div class="row inputcomponent input-group mb-3" id="schoolgroup">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">学校</span>
+                                </div>
+                                <input type="text" id="userschool" class="form-control" value="{school}">
+                               
+                            </div>
+                            <div class="row inputcomponent input-group mb-3" id="majorgroup">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">专业</span>
+                                </div>
+                                <input type="text" id="usermajor" class="form-control" value="{major}">
+                               
+                            </div>
+                            <div class="row inputcomponent input-group mb-3" id="classgroup">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">班级</span>
+                                </div>
+                                <input type="text" id="userclass" class="form-control" value="{class}">
+                               
+                            </div>
+                    
+                            <div class="row inputcomponent input-group mb-3 d-none" id="userimggroup">
+                        
+                                 <form enctype="multipart/form-data">
+                                        <h4>暂时只支持png,jpg,jpeg格式图片</h4>
+                                        <input id="imgfile" type="file"  data-show-upload="false" data-show-caption="true" multiple>
+                                     
+                                </form>   
+                            </div>
+
+                            <div class="row inputcomponent" id="infobtngroup">
+                                <input class="btn btn-primary btn-md btn-block" id="submitinfo" type="submit" value="提交要修改的信息">
+                            </div>
+
+                            <div class="row inputcomponent d-none" id="pswbtngroup">
+                                <input class="btn btn-info btn-md btn-block" id="updatepassword" type="submit" value="修改您的密码">
+                            </div>
+
+                            <div class="row inputcomponent d-none" id="userimgbtngroup">
+                                <input class="btn btn-success btn-md btn-block" id="setuserimg" type="submit" value="设置您的头像">
+                            </div>
+                </div>                        
+                 
+             
+                </div>
+                <div class="col-1  col-md-4">
+                    
+                </div>
+                
+            </div>
+        </div>
+
+        <script>
+            let userPageUrl=/.*?id=.*psw=.*\//.exec($(location).attr("href"));
+           
+            document.getElementById('myPage').href=userPageUrl.toString().slice(0,userPageUrl.toString().length-1);
+            document.getElementById('myCollection').href=userPageUrl+"myCollection.html";
+            document.getElementById('submitNotice').href=userPageUrl+"submitNotice.html";
+            document.getElementById('selfCenter').href=userPageUrl+"selfCenter.html";
+            $(document).ready(function () {
+                $("#imgfile").fileinput({
+                    theme: 'fas',
+                    uploadUrl:userPageUrl+"userheadimg",
+                    enctype: 'multipart/form-data',
+                    maxFileCount:1,
+                    allowedFileExtensions : ['jpg', 'png','jpeg'],
+                    layoutTemplates:{
+                        actionUpload:"",
+                    },
+                    previewSettings: {
+                        image: {width: "100px", height: "100px"},
+                    },
+                    uploadExtraData:function(previewID,index){
+                        let retdata={};
+                        retdata["userid"]=userPageUrl.toString().match(/id=(\S*)&psw=/)[1];
+                        retdata["imgpath"]=retdata["userid"];
+                        return retdata; 
+                    },
+                }).on("filebatchselected", function(event, files) {
+                   
+                })
+                .on("fileuploaded", function(event, data) {
+                    alert("头像上传成功，马上跳转至个人主页");
+                    window.open(userPageUrl.toString().slice(0,userPageUrl.toString().length-1),"_self");
+                });
+                   
+
+            });
+            
+            $("#updateinfomodel").click(function(){
+                
+                if($("#namegroup").hasClass("d-none"))$("#namegroup").removeClass("d-none");
+                if($("#schoolgroup").hasClass("d-none"))$("#schoolgroup").removeClass("d-none");
+                if($("#majorgroup").hasClass("d-none"))$("#majorgroup").removeClass("d-none");
+                if($("#classgroup").hasClass("d-none"))$("#classgroup").removeClass("d-none");
+                if($("#infobtngroup").hasClass("d-none"))$("#infobtngroup").removeClass("d-none");
+                if($("#pswgroup").hasClass("d-none"))$("#pswgroup").removeClass("d-none");
+                if(!$("#oldpswgroup").hasClass("d-none"))$("#oldpswgroup").addClass("d-none");
+                if(!$("#newpswgroup").hasClass("d-none"))$("#newpswgroup").addClass("d-none");
+                if(!$("#pswbtngroup").hasClass("d-none"))$("#pswbtngroup").addClass("d-none");
+                if(!$("#userimggroup").hasClass("d-none"))$("#userimggroup").addClass("d-none");
+                if(!$("#userimgbtngroup").hasClass("d-none"))$("#userimgbtngroup").addClass("d-none");
+            });
+
+
+            $("#updatepswmodel").click(function(){
+                if(!$("#namegroup").hasClass("d-none"))$("#namegroup").addClass("d-none");
+                if(!$("#schoolgroup").hasClass("d-none"))$("#schoolgroup").addClass("d-none");
+                if(!$("#majorgroup").hasClass("d-none"))$("#majorgroup").addClass("d-none");
+                if(!$("#classgroup").hasClass("d-none"))$("#classgroup").addClass("d-none");
+                if(!$("#infobtngroup").hasClass("d-none"))$("#infobtngroup").addClass("d-none");
+                if(!$("#pswgroup").hasClass("d-none"))$("#pswgroup").addClass("d-none");
+                if($("#oldpswgroup").hasClass("d-none"))$("#oldpswgroup").removeClass("d-none");
+                if($("#newpswgroup").hasClass("d-none"))$("#newpswgroup").removeClass("d-none");
+                if($("#pswbtngroup").hasClass("d-none"))$("#pswbtngroup").removeClass("d-none");
+                if(!$("#userimggroup").hasClass("d-none"))$("#userimggroup").addClass("d-none");
+                if(!$("#userimgbtngroup").hasClass("d-none"))$("#userimgbtngroup").addClass("d-none");
+            });
+
+            $("#updateuserimgmodel").click(function(){
+                if(!$("#namegroup").hasClass("d-none"))$("#namegroup").addClass("d-none");
+                if(!$("#schoolgroup").hasClass("d-none"))$("#schoolgroup").addClass("d-none");
+                if(!$("#majorgroup").hasClass("d-none"))$("#majorgroup").addClass("d-none");
+                if(!$("#classgroup").hasClass("d-none"))$("#classgroup").addClass("d-none");
+                if(!$("#infobtngroup").hasClass("d-none"))$("#infobtngroup").addClass("d-none");
+                if(!$("#pswgroup").hasClass("d-none"))$("#pswgroup").addClass("d-none");
+                if(!$("#oldpswgroup").hasClass("d-none"))$("#oldpswgroup").addClass("d-none");
+                if(!$("#newpswgroup").hasClass("d-none"))$("#newpswgroup").addClass("d-none");
+                if(!$("#pswbtngroup").hasClass("d-none"))$("#pswbtngroup").addClass("d-none");
+                if($("#userimggroup").hasClass("d-none"))$("#userimggroup").removeClass("d-none");
+                if($("#userimgbtngroup").hasClass("d-none"))$("#userimgbtngroup").removeClass("d-none");
+            });
+
+            $("#submitinfo").click(function() {
+                if($("#userid").val()!='' &&  $("#userpassword").val()!=''){
+                    if($("#username").val()!="" || $("#userschool").val()!="" || $("#usermajor").val()!="" || $("#userclass").val()!=""){
+                        let formObject = {};
+                        formObject["userid"] = $("#userid").val();
+                        formObject["userpassword"] = $("#userpassword").val();
+                        if($("#username").val()!="")formObject["username"]=$("#username").val();
+                        if($("#userschool").val()!="")formObject["userschool"]=$("#userschool").val();
+                        if($("#usermajor").val()!="")formObject["usermajor"]=$("#usermajor").val();
+                        if($("#userclass").val()!="")formObject["userclass"]=$("#userclass").val();
+                        $.ajax({
+                            url:userPageUrl+"updateUserInfo",
+                            type:"post",
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify(formObject),
+                            dataType: "json",
+                            success:function(data){
+                                if(data.isValid){
+                                    if(data.infoRight){
+                                        alert("个人信息修改成功");
+                                        window.open(userPageUrl.toString().slice(0,userPageUrl.toString().length-1),"_self");
+                                    }
+                                    else{
+                                        alert("账号或密码出现错误");
+                                    }
+                                }else{
+                                    alert("服务器异常");
+                                }
+                            },
+                            error:function(e){
+                                alert("表单提交出现错误");
+                            }
+                        });
+                    }else{
+                        alert("提交信息不能全部为空");
+                    }
+                }else{
+                    alert("账号密码不能为空");
+                }
+            });
+    
+                      
+            $("#updatepassword").click(function() {
+                if($("#userid").val()!='' &&  $("#useroldpassword").val()!='' && $("#usernewpassword").val()!=""){
+        
+                    let formObject = {};
+                    formObject["userid"] = $("#userid").val();
+                    formObject["userpassword"] = $("#useroldpassword").val();
+                    formObject["usernewpassword"] = $("#usernewpassword").val();
+                    $.ajax({
+                        url:userPageUrl+"updatePswByOldPsw",
+                        type:"post",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(formObject),
+                        dataType: "json",
+                        success:function(data){
+                            if(data.isValid){
+                                if(data.infoRight){
+                                    alert("密码修改成功,请重新登录");
+                                    window.open('/',"_self");
+                                }
+                                else{
+                                    alert("账号或密码出现错误");
+                                }
+                            }else{
+                                alert("服务器异常");
+                            }
+                        },
+                        error:function(e){
+                            alert("表单提交出现错误");
+                        }
+                    });
+                }else{
+                    alert("账号密码不能为空");
+                }
+            });
+    
+            $("#setuserimg").click(()=>{
+                if($("#imgfile").val()!=""){
+                    $("#imgfile").fileinput("upload");
+                }else{
+                    alert("请上传头像再进行提交");
+                }
+            })
+        </script>
+    
+    </body>
+
+</html>

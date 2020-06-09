@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>welcome to hbnu Lost And Found!</title>
+        <!-- css -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
+        
+        <!-- 支持响应式布局 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <header>
+            <div class="jumbotron">
+                <h1 class="display-4">欢迎来到失物招领</h1>
+                <p class="lead  d-none d-sm-block">在这里您可以发布失物招领以寻找您的物品，或是发布失物招领为物品寻找主人</p>
+                <hr class="my-4">
+            </div>
+        </header>
+        <div class="container-fluid" id="main">
+            <div class="row">
+                <div class="col-md-7 d-none d-sm-block align-self-center" >
+                    <div id="introduction">
+                        <p>
+                            如果您不小心丢失了某项物品，这里可以帮助您发布寻物启事或浏览启事寻找您的物品。如果您捡到了某项物品,
+                            也可以来到这里发布启事或在启事中寻找失主。
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-5 d-md-block align-self-center" >
+                    <div id="login">
+                        <div class="container-fluid">
+                           
+                                <div class="row logincomponent input-group mb-3">
+                                    <div class="input-group-prepend">
+                                    <span class="input-group-text" >账号：</span>
+                                    </div>
+                                    <input type="text" id="userid" name="userid" class="form-control" placeholder="请输入您的账号" aria-label="Username" aria-describedby="addon-wrapping">
+                                </div>
+        
+                                <div class="row logincomponent input-group mb-3">
+                                    <div class="input-group-prepend">
+                                    <span class="input-group-text" >密码：</span>
+                                    </div>
+                                    <input type="password" id="userpassword" name="userpassword" class="form-control" placeholder="请输入您的密码" aria-label="Password" aria-describedby="addon-wrapping">
+                                </div>
+                                    
+                                <div class="row logincomponent input-group mb-3">
+                                    <div class="col-6  col-sm-8"></div>
+                                    <div class="col-6  col-sm-4">
+                                        <input type="checkbox" id="isremember" aria-label="check remember password">
+                                
+                                        <label for="isremember">记住密码</label>
+                                
+                                    </div>    
+                                        
+                                </div>
+
+                                <div class="row logincomponent">
+                                    <input class="btn btn-primary btn-md btn-block" id="userlogin" type="submit" value="登录">
+                                </div>
+                          
+                            <div class="row logincomponent">
+                                <div class="col ">
+                                    <a href="/findpassword" id="findpassword">
+                                        忘记密码    
+                                    </a>
+                                </div>
+                                <div class="col ">
+                                    <a href="/loginaccount" id="loginaccount">
+                                        注册账号
+                                    </a>
+                                </div>
+                            </div>    
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>    
+        </div>
+        <footer>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        cpf at 2020.4   
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="footer-copyright">
+                            ©hbnu
+                        </div>                       
+                    </div>
+                </div>
+                
+            </div>     
+        </footer>
+       
+                    <!-- js -->
+                    <script src="js/jquery.js"></script>
+                    <script src="js/bootstrap.js"></script>
+                    <script src="js/jquery.cookie.js"></script>
+
+                    <script>
+                    $(document).ready(()=>{
+                        if($.cookie("userid")!=null && $.cookie("userpassword")!=null){
+                            $("#userid").val($.cookie("userid"));
+                            $("#userpassword").val($.cookie("userpassword"));
+                            if(!$("#isremember").is(":checked")){
+                                $("#isremember").attr("checked",true);
+                            }
+                        }
+                    });
+
+                    $("#userlogin").click(function() {
+                        if($("#userid").val()!='' &&  $("#userpassword").val()!=''){
+                
+                            let formObject = {};
+                            formObject["userid"] = $("#userid").val();
+                            formObject["userpassword"] = $("#userpassword").val();
+                            $.ajax({
+                                url:"login",
+                                type:"post",
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify(formObject),
+                                dataType: "json",
+                                success:function(data){
+                                    if(data.isValid){
+                                        if(data.infoRight){
+                                            if($("#isremember").is(":checked")){
+                                                $.cookie("userid",$("#userid").val(),{expires:7});
+                                                $.cookie("userpassword",$("#userpassword").val(),{expires:7});
+                                            }else{
+                                                $.removeCookie("userid");
+                                                $.removeCookie("userpassword");
+                                            }
+                                            window.open("/mainMenu.html?id="+formObject.userid+"&psw="+formObject.userpassword,"_self");
+                                        }
+                                        else{
+                                            alert("账号或密码出现错误");
+                                        }
+                                    }else{
+                                        alert("服务器异常");
+                                    }
+                                },
+                                error:function(e){
+                                    alert("表单提交出现错误");
+                                }
+                            });
+                        }else{
+                            alert("账号密码不能为空");
+                        }
+                    });
+                    </script>
+       
+
+    </body>
+</html>

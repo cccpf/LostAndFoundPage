@@ -1,0 +1,23 @@
+
+
+#noticetitle{
+    text-align: center;
+}
+
+
+#imgdisplay{
+    margin:5px;
+    width: 100%;
+}
+
+#imgnum{
+    text-align: right;
+}
+
+#collectionnum{
+    text-align: center;
+}
+
+#context{
+    text-indent: 2em;
+}

@@ -1,0 +1,14 @@
+/**
+*
+*/
+div{
+    padding: 0;
+    margin:0;
+}
+
+/* body */
+.inputcomponent{
+	padding:5px;
+	margin:5px;
+	width:100%;
+}

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/conversationtemplate.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container-fluid" id="conversationarea">
+           
+        </div>
+        <div class="container-fluid" id="conversationareabottom">
+           <div class="row d-none">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control">
+                </div>
+           </div>
+        </div>
+        <div class="container-fluid" id="inputtextarea">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-9 col-md-6">
+                    <div class="input-group mb-3">
+                        <input type="text" id="mytext" class="form-control">
+                    </div>
+                </div>
+                <div class="col-3 col-md-2">
+                    <button type="button" id="submitmytext" class="btn btn-primary btn-block">提交</button>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script>
+            let userPageUrl=/.*?id=.*psw=.*\//.exec($(location).attr("href"));
+            let userid=userPageUrl.toString().match(/id=(\S*)&psw=/)[1];
+            let allUrl=$(location).attr("href").split("/");
+            let nid=(allUrl[allUrl.length-1]).toString().match(/nid=(\S*)&u0_id/)[1];
+            let $conversationarea=$("#conversationarea");
+            
+            
+            $(document).ready(()=>{
+                freshConversation();
+                setInterval(()=>{
+                    freshConversation();
+                },1000);
+            });
+
+            $("#submitmytext").click(()=>{
+                if($("#mytext").val()!=null && $("#mytext").val()!==""){
+                    let formObject={};
+                    formObject["userid"]=userid;
+                    formObject["nid"]=nid;
+                    formObject["mytext"]=$("#mytext").val();
+                   
+                    $.ajax({
+                        url:"submitTextToConversation",
+                        type:"post",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(formObject),
+                        dataType: "json",
+                        success:function(data){
+                            if(data.submitsuccess){
+                                setMyText(formObject.mytext,userid);
+                                $("#mytext").val("");   
+                                $(document).scrollTop($(document).height()-$(window).height());  
+                            }else{
+                                alert("连接服务器出错");
+                            }
+                        },
+                        error:function(e){
+                            alert("上传对话失败");
+                        }
+                    });
+                }else{
+                    alert("提交对话不能为空");
+                }
+                
+            }); 
+
+            function freshConversation(){
+                let formObject={};
+                formObject["userid"]=userid;
+                formObject["nid"]=nid;
+
+                $.ajax({
+                    url:"getConversation",
+                    type:"post",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(formObject),
+                    dataType: "json",
+                    success:function(data){
+                        if(data.isValid){
+                            $conversationarea.empty();
+                            setConversation(data.conversation);     
+                            $(document).scrollTop($(document).height()-$(window).height());              
+                        }else{
+                            alert("连接服务器出错");
+                        }
+                    },
+                    error:function(e){
+                        alert("更新对话失败");
+                    }
+                });
+            }
+
+            function setConversation(text){
+                let textarr=text.split("&");
+                for(let i=0;i<textarr.length;i++){
+                    let utext=textarr[i].split("/");
+                    if(utext.length==2){
+                        if(userid===utext[0]){
+                            $conversationarea.append(setMyText(utext[1],userid));
+                        }
+                        else{
+                            $conversationarea.append(setOtherText(utext[1],utext[0]));
+                        }
+                    }
+                }
+            }
+
+            function setOtherText(text,otherid="{otherid}"){
+                return $( '<div class="row">'+
+                '<div class="col col-md-6">'+
+                    '<div class="input-group mb-3">'+
+                        '<div class="input-group-prepend">'+
+                            '<span class="input-group-text">'+
+                                otherid+
+                            '</span>'+
+                        '</div>'+
+                        '<input type="text" class="form-control" value="'+text+'" disabled>'+
+                    '</div>'+
+                '</div>'+
+                '<div class="col-md-6"></div>'+
+            '</div>');
+            }
+
+            function setMyText(text,myid="{myid}"){
+                return $('<div class="row">'+
+                '<div class="col-md-6"></div>'+
+                '<div class="col col-md-6">'+
+                    '<div class="input-group mb-3">'+
+                        '<input type="text" class="form-control" value="'+text+'" disabled>'+
+                        '<div class="input-group-append">'+
+                            '<span class="input-group-text">'+
+                                myid+
+                            '</span>'+
+                        '</div>'+
+                    '</div>'+
+                '</div>'+
+            '</div>');
+            }
+        </script>
+    </body>
+</html>

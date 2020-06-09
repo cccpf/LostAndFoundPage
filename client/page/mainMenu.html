@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <titile></titile>
+
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/mainMenu.css" rel="stylesheet">
+        <!-- 支持响应式布局 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    </head>
+
+    <body>
+        <header>
+            <div class="container-fluid">
+                <ul class="nav nav-tabs">
+                
+                    <div class="col-3 col-md-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index">
+                                首页
+                            </a>
+                        </li>
+                    </div>
+            
+                    <div class="col-3 col-md-2">
+                        <li class="nav-item">
+                            <a class="nav-link" id="myCollection" href="#">
+                                我的收藏
+                            </a>
+                        </li>
+                    </div>
+                    
+                    <div class="col-3 col-md-2">
+                        <li class="nav-item">
+                            <a class="nav-link" id="submitNotice" href="#">
+                                我要求助
+                            </a>
+                        </li>
+                    </div>
+                    <div class="col-md-4 d-none d-md-block"></div>
+            
+                    <div class="col-3 col-md-2">
+                        <li class="nav-item">
+                            <a class="nav-link" id="selfCenter" href="#">
+                                个人中心
+                            </a>
+                        </li>
+                    
+                    </div>
+                </ul>     
+            </div>
+        </header>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-0 col-md-3 d-none d-md-block" id="userinfo">
+                   <div class="row">
+                       <div class="col-3 align-self-center">
+                            <img src="{头像}" id="userimg" alt="头像显示错误" width="60px">     
+                       </div>
+                       <div class="col-4 align-self-center"><p id="useridp">{id}</p></div>
+                       <div class="col-5"></div>
+                   </div>
+
+                    <table class="table table-borderless">
+                        <tr>
+                            <th scope="col" id="userschool">
+                               学校： {学校}
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th scope="col" id="usermajor">
+                                专业： {专业}
+                             </th>
+                        </tr>
+
+
+                        <tr>
+                            <th scope="col" id="userclass">
+                                班级： {班级}
+                             </th>
+                        </tr>
+
+                        
+                        <tr>
+                            <th scope="col" id="username">
+                                姓名： {姓名}
+                             </th>
+                        </tr>
+
+                      
+                    </table>
+                </div>
+    
+                <div class="col-12 col-md-9" id="displayitems">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-2 d-none d-md-block">
+
+                            </div>
+                            <div class="col-6 col-md-4">      
+                                <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    全部/按时间从后到前
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <button class="dropdown-item active" id="allnotice">全部</button>
+                                   
+                                    <button class="dropdown-item" id="lostnotice">只找失主</button>
+                                     
+                                    <button class="dropdown-item" id="findnotice">只找物品</button>
+                                    
+                                    <div role="separator" class="dropdown-divider"></div>
+                                    <button class="dropdown-item active" id="timedesc">按时间从后到前</button>
+                                    
+                                    <button class="dropdown-item" id="timeasc">按时间从前到后</button>
+                                     
+                                    <button class="dropdown-item" id="collectiondesc">按收藏从多到少</button>
+                                    
+                                    <button class="dropdown-item" id="collectionasc">按收藏从少到多</button>
+                                </div>
+                                </div>
+                            </div>
+                        
+                            <div class="col-3 col-md-4">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-3 col-md-2">
+                                <button type="button" class="btn btn-light">搜索</button>
+                            </div>
+                        </div>
+                        <div class="container-fluid">
+                            <div class="row displayrow" id="r0">
+                                <div class="col displayitem" id="r0-c0">
+                                    <figure class="figure">
+                                        <img id="r0-c0-img"class="figure-img img-fluid rounded" alt="图片显示错误">
+                                        <figcaption id="r0-c0-title" class="figure-caption text-right"></figcaption>
+                                        <figcaption id="r0-c0-cn" class="figure-caption text-right"></figcaption>
+                                    </figure>
+                                </div>
+                                <div class="col displayitem" id="r0-c1">
+                                    <figure class="figure">
+                                        <img  id="r0-c1-img" class="figure-img img-fluid rounded" alt="图片显示错误">
+                                        <figcaption id="r0-c1-title" class="figure-caption text-right"> </figcaption>
+                                        <figcaption id="r0-c1-cn" class="figure-caption text-right"></figcaption>
+                                    </figure>
+                                </div>
+                                <div class="col displayitem" id="r0-c2">
+                                    <figure class="figure">
+                                        <img id="r0-c2-img" class="figure-img img-fluid rounded" alt="图片显示错误">
+                                        <figcaption id="r0-c2-title" class="figure-caption text-right"> </figcaption>
+                                        <figcaption id="r0-c2-cn" class="figure-caption text-right"></figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                            <div class="row displayrow" id="r1">
+                                <div class="col displayitem" id="r1-c0">
+                                    <figure class="figure">
+                                        <img id="r1-c0-img" class="figure-img img-fluid rounded" alt="图片显示错误">
+                                        <figcaption id="r1-c0-title" class="figure-caption text-right"> </figcaption>
+                                        <figcaption id="r1-c0-cn" class="figure-caption text-right"></figcaption>
+                                    </figure>
+                                </div>
+                                <div class="col displayitem" id="r1-c1">
+                                    <figure class="figure">
+                                        <img id="r1-c1-img" class="figure-img img-fluid rounded" alt="图片显示错误">
+                                        <figcaption id="r1-c1-title" class="figure-caption text-right"></figcaption>
+                                        <figcaption id="r1-c1-cn" class="figure-caption text-right"></figcaption>
+                                    </figure>
+                                </div>
+                                <div class="col displayitem" id="r1-c2">
+                                    <figure class="figure">
+                                        <img id="r1-c2-img" class="figure-img img-fluid rounded" alt="图片显示错误">
+                                        <figcaption id="r1-c2-title" class="figure-caption text-right"></figcaption>
+                                        <figcaption id="r1-c2-cn" class="figure-caption text-right"></figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                            <div class="row displayrow" id="r2">
+                                <div class="col displayitem" id="r2-c0">
+                                    <figure class="figure">
+                                        <img id="r2-c0-img" class="figure-img img-fluid rounded" alt="图片显示错误">
+                                        <figcaption id="r2-c0-title" class="figure-caption text-right"></figcaption>
+                                        <figcaption id="r2-c0-cn" class="figure-caption text-right"></figcaption>
+                                    </figure>
+                                </div>
+                                <div class="col displayitem" id="r2-c1">
+                                    <figure class="figure">
+                                        <img id="r2-c1-img" class="figure-img img-fluid rounded" alt="图片显示错误">
+                                        <figcaption id="r2-c1-title" class="figure-caption text-right"></figcaption>
+                                        <figcaption id="r2-c1-cn" class="figure-caption text-right"></figcaption>
+                                    </figure>
+                                </div>
+                                <div class="col displayitem" id="r2-c2">
+                                    <figure class="figure">
+                                        <img id="r2-c2-img" class="figure-img img-fluid rounded" alt="图片显示错误">
+                                        <figcaption id="r2-c2-title" class="figure-caption text-right"></figcaption>
+                                        <figcaption id="r2-c2-cn" class="figure-caption text-right"></figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2 col-md-4"></div>
+                            <div class="col-8 col-md-8">
+                               
+                                <div class="row">
+                                    <div class="col-3 col-md-2">
+                                        <div class="input-group mb-3">
+                                            <input class="btn btn-primary" id="subpage" type="submit" value="上一页">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 d-none d-md-block"></div>
+                                    <div class="col-6 col-md-4">
+                                        <div class="input-group mb-3">
+                                            <input type="number" id="controlpage" class="form-control" placeholder="输入页数" min="1">
+                                            <div class="input-group-append" >
+                                                <input class="btn btn-primary" id="jumptopage" type="submit" value="跳转">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 d-none d-md-block"></div>
+                                    <div class="col-3 col-md-2">
+                                        <div class="input-group mb-3">
+                                            <input class="btn btn-primary" id="addpage" type="submit" value="下一页">
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="col-2 d-md-none"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+
+        </footer>
+
+        <script src="js/jquery.js"></script>
+        <script src="js/popper.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script>
+            let userPageUrl=/\/mainMenu.html\?id=.*psw=.*/.exec($(location).attr("href"));
+            document.getElementById('myCollection').href=userPageUrl+"/myCollection.html";
+            document.getElementById('submitNotice').href=userPageUrl+"/submitNotice.html";
+            document.getElementById('selfCenter').href=userPageUrl+"/selfCenter.html";
+            
+            let nowpage=1;
+            refreshPageNum();
+            
+            let noticetype="allnotice",noticesortby="timedesc";
+            refreshMaxPageNum();
+            refreshAllNotice();
+
+            $("#allnotice").click(()=>{
+                if(noticetype!=="allnotice"){
+                    noticetype="allnotice";
+                    if($("#lostnotice").hasClass("active"))$("#lostnotice").removeClass("active");
+                    if($("#findnotice").hasClass("active"))$("#findnotice").removeClass("active");
+                    if(!$("#allnotice").hasClass("active"))$("#allnotice").addClass("active");
+                    refreshDropDownMenu();
+                }
+            });
+
+            $("#lostnotice").click(()=>{
+                if(noticetype!=="lostnotice"){
+                    noticetype="lostnotice";
+                    if($("#allnotice").hasClass("active"))$("#allnotice").removeClass("active");
+                    if($("#findnotice").hasClass("active"))$("#findnotice").removeClass("active");
+                    if(!$("#lostnotice").hasClass("active"))$("#lostnotice").addClass("active");
+                    refreshDropDownMenu();
+                }
+            });
+
+            $("#findnotice").click(()=>{
+                if(noticetype!=="findnotice"){
+                    noticetype="findnotice";
+                    if($("#allnotice").hasClass("active"))$("#allnotice").removeClass("active");
+                    if($("#lostnotice").hasClass("active"))$("#lostnotice").removeClass("active");
+                    if(!$("#findnotice").hasClass("active"))$("#findnotice").addClass("active");
+                    refreshDropDownMenu();
+                }
+            });
+
+
+            $("#timedesc").click(()=>{
+                if(noticesortby!=="timedesc"){
+                    noticesortby="timedesc";
+                    if($("#timeasc").hasClass("active"))$("#timeasc").removeClass("active");
+                    if($("#collectiondesc").hasClass("active"))$("#collectiondesc").removeClass("active");
+                    if($("#collectionasc").hasClass("active"))$("#collectionasc").removeClass("active");
+                    if(!$("#timedesc").hasClass("active"))$("#timedesc").addClass("active");
+                    refreshDropDownMenu();
+                }
+                 
+            });
+
+            $("#timeasc").click(()=>{
+                if(noticesortby!=="timeasc"){
+                    noticesortby="timeasc"; 
+                    if($("#timedesc").hasClass("active"))$("#timedesc").removeClass("active");
+                    if($("#collectiondesc").hasClass("active"))$("#collectiondesc").removeClass("active");
+                    if($("#collectionasc").hasClass("active"))$("#collectionasc").removeClass("active");
+                    if(!$("#timeasc").hasClass("active"))$("#timeasc").addClass("active");
+                    refreshDropDownMenu();
+                }
+                
+            });
+
+            $("#collectiondesc").click(()=>{
+                if(noticesortby!=="collectiondesc"){
+                    noticesortby="collectiondesc"; 
+                    if($("#timedesc").hasClass("active"))$("#timedesc").removeClass("active");
+                    if($("#timeasc").hasClass("active"))$("#timeasc").removeClass("active");
+                    if($("#collectionasc").hasClass("active"))$("#collectionasc").removeClass("active");
+                    if(!$("#collectiondesc").hasClass("active"))$("#collectiondesc").addClass("active");
+                    refreshDropDownMenu();
+                }
+            });
+
+            $("#collectionasc").click(()=>{
+                if(noticesortby!=="collectionasc"){
+                    noticesortby="collectionasc";
+                    if($("#timedesc").hasClass("active"))$("#timedesc").removeClass("active");
+                    if($("#timeasc").hasClass("active"))$("#timeasc").removeClass("active");
+                    if($("#collectiondesc").hasClass("active"))$("#collectiondesc").removeClass("active");
+                    if(!$("#collectionasc").hasClass("active"))$("#collectionasc").addClass("active");
+                    refreshDropDownMenu();
+                }
+                
+            });
+
+            $("#subpage").click(()=>{
+                $("#controlpage").val(nowpage);
+                if(nowpage>1){
+                    nowpage--;
+                    $("#controlpage").val(nowpage);
+                    refreshPageNum();
+                    refreshAllNotice();
+                }
+            });
+
+            $("#jumptopage").click(()=>{
+                if($("#controlpage").val()>=1 && $("#controlpage").val()<=parseInt($("#controlpage").attr("max"))){
+                    nowpage=parseInt($("#controlpage").val()); 
+                    refreshPageNum();
+                    refreshAllNotice();
+                }else{
+                    $("#controlpage").val(nowpage);
+                }
+
+            });
+
+            $("#addpage").click(()=>{
+                $("#controlpage").val(nowpage);
+                if(nowpage<parseInt($("#controlpage").attr("max"))){
+                    nowpage++;
+                    $("#controlpage").val(nowpage);
+                    refreshPageNum();
+                    refreshAllNotice();
+                }
+            });
+
+            function refreshPageNum(){
+                $("#controlpage").attr("value",nowpage.toString());
+            };
+
+            const noticetypearr={"allnotice":"全部","findnotice":"只找物品","lostnotice":"只找失主"};
+            const noticesortbyarr={"timedesc":"按时间从后到前","timeasc":"按时间从前到后","collectiondesc":"按收藏从多到少","collectionasc":"按收藏从少到多"};
+
+            function refreshDropDownMenu(){
+
+                $("#dropdownmenu").text(noticetypearr[noticetype]+"/"+noticesortbyarr[noticesortby]);
+                nowpage=1;
+                $("#controlpage").val(nowpage);
+                refreshPageNum();
+                refreshAllNotice();
+                refreshMaxPageNum();
+            };
+
+            function refreshMaxPageNum(){
+                let formObject={};
+                formObject["ownerid"]=userPageUrl.toString().match(/id=(\S*)&psw=/)[1];
+                formObject["noticetype"]=noticetype;
+                $.ajax({
+                    url:"getPageNum",
+                    type:"post",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(formObject),
+                    dataType: "json",
+                    success:function(data){
+                        
+                        $("#controlpage").attr("max",data.pagenum.toString());
+                    },
+                    error:function(e){
+                        alert("获取页面数量失败");
+                    }
+                });
+            }
+
+            function refreshAllNotice(){
+                let noticeinfo={};
+                noticeinfo["ownerid"]=userPageUrl.toString().match(/id=(\S*)&psw=/)[1];
+                noticeinfo["noticetype"]=noticetype;
+                noticeinfo["noticesortby"]=noticesortby;
+                noticeinfo["pagenum"]=nowpage;
+
+                $.ajax({
+                url:"getNoticeData",
+                type:"post",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(noticeinfo),
+                dataType: "json",
+                success:function(data){
+                    if(data.isValid){
+                        setNoticeData(data);
+                    }else{
+                        alert("告示刷新失败");
+                    }
+                },
+                error:function(e){
+                    alert("刷新告示时无法连接服务器");
+                }
+            });
+            };
+            
+            function setNoticeData(data){
+                $("#r0-c0-img").attr("src",data.n0_img);
+                $("#r0-c0-title").text(data.n0_title);
+                $("#r0-c0-cn").text("收藏数："+data.n0_collectionnum);
+                if(data.n0_nid != null)$("#r0-c0").attr("onclick",createNoticeOnclickFunc(data.n0_nid));
+                else{
+                        $("#r0-c0").attr("onclick","");
+                }
+
+                $("#r0-c1-img").attr("src",data.n1_img);
+                $("#r0-c1-title").text(data.n1_title);
+                $("#r0-c1-cn").text("收藏数："+data.n1_collectionnum);
+                if(data.n1_nid != null)$("#r0-c1").attr("onclick",createNoticeOnclickFunc(data.n1_nid));
+                else{
+                        $("#r0-c1").attr("onclick","");
+                }
+
+                $("#r0-c2-img").attr("src",data.n2_img);
+                $("#r0-c2-title").text(data.n2_title);
+                $("#r0-c2-cn").text("收藏数："+data.n2_collectionnum);
+                if(data.n2_nid != null)$("#r0-c2").attr("onclick",createNoticeOnclickFunc(data.n2_nid));
+                else{
+                        $("#r0-c2").attr("onclick","");
+                }
+
+                $("#r1-c0-img").attr("src",data.n3_img);
+                $("#r1-c0-title").text(data.n3_title);
+                $("#r1-c0-cn").text("收藏数："+data.n3_collectionnum);
+                if(data.n3_nid != null)$("#r1-c0").attr("onclick",createNoticeOnclickFunc(data.n3_nid));
+                else{
+                        $("#r1-c0").attr("onclick","");
+                }
+
+                $("#r1-c1-img").attr("src",data.n4_img);
+                $("#r1-c1-title").text(data.n4_title);
+                $("#r1-c1-cn").text("收藏数："+data.n4_collectionnum);
+                if(data.n4_nid != null)$("#r1-c1").attr("onclick",createNoticeOnclickFunc(data.n4_nid));
+                else{
+                        $("#r1-c1").attr("onclick","");
+                }
+
+                $("#r1-c2-img").attr("src",data.n5_img);
+                $("#r1-c2-title").text(data.n5_title);
+                $("#r1-c2-cn").text("收藏数："+data.n5_collectionnum);
+                if(data.n5_nid != null)$("#r1-c2").attr("onclick",createNoticeOnclickFunc(data.n5_nid));
+                else{
+                        $("#r1-c2").attr("onclick","");
+                }
+
+                $("#r2-c0-img").attr("src",data.n6_img);
+                $("#r2-c0-title").text(data.n6_title);
+                $("#r2-c0-cn").text("收藏数："+data.n6_collectionnum);
+                if(data.n6_nid != null)$("#r2-c0").attr("onclick",createNoticeOnclickFunc(data.n6_nid));
+                else{
+                        $("#r2-c0").attr("onclick","");
+                }
+
+                $("#r2-c1-img").attr("src",data.n7_img);
+                $("#r2-c1-title").text(data.n7_title);
+                $("#r2-c1-cn").text("收藏数："+data.n7_collectionnum);
+                if(data.n7_nid != null)$("#r2-c1").attr("onclick",createNoticeOnclickFunc(data.n7_nid));
+                else{
+                        $("#r2-c1").attr("onclick","");
+                }
+
+                $("#r2-c2-img").attr("src",data.n8_img);
+                $("#r2-c2-title").text(data.n8_title);
+                $("#r2-c2-cn").text("收藏数："+data.n8_collectionnum);
+                if(data.n8_nid != null)$("#r2-c2").attr("onclick",createNoticeOnclickFunc(data.n8_nid));
+                else{
+                        $("#r2-c2").attr("onclick","");
+                }
+
+            }
+
+            function createNoticeOnclickFunc(nid){
+                return "window.open('"+userPageUrl+"/nid="+nid+"')";
+            }
+        </script>
+    </body>
+   
+</html>

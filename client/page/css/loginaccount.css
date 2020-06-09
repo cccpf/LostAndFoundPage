@@ -1,0 +1,14 @@
+/**
+*为loginaccount.html页面构建样式
+*/
+div{
+	padding: 0;
+	margin: 0;
+}
+
+
+/* body */
+.logincomponent{
+    padding: 5px;
+
+}

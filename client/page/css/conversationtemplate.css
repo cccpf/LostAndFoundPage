@@ -1,0 +1,17 @@
+#conversationarea{
+    padding-bottom: 100px;
+}
+
+#conversationareabottom{
+    bottom:5px;
+    padding-top: 20px;
+
+}
+
+#inputtextarea{
+    position: fixed;
+    bottom:5px;
+    padding-top: 20px;
+
+    border-top: 1px solid;
+}

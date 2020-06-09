@@ -1,0 +1,75 @@
+/**
+*为index.html页面构建样式
+*/
+
+
+div{
+	padding: 0;
+	margin: 0;
+}
+p{
+	text-indent: 2em;
+}
+/* footer */
+footer{
+	margin: 0;
+	padding: 10px;
+	text-align: center;
+	background-color: red;
+}
+/* header */
+header{
+	text-align: center;
+	margin: 0;
+	padding: 0;
+}
+
+/* body */
+.logincomponent{
+	padding:5px;
+	margin:5px;
+	width:100%;
+}
+
+#main{
+	background-color: rebeccapurple;
+	width:100%;
+}
+#login{
+	border: 1px solid black; 	
+	border-radius: 3px;
+	border-style:solid;
+	margin:0;
+	padding: 50px;
+}
+
+#introduction{
+	border: 1px solid black;
+	padding: 30px;
+	margin: 30px;
+}
+#loginaccount{
+	position: relative;
+	left: 10%;
+}
+
+#findpassword{
+	position: relative;
+	left: 20%;
+}
+
+#rememberpassword{
+	text-align: right;
+	
+}
+.help-block{
+	background-color: blue;
+}
+
+.has-error{
+	background-color: red;
+}
+
+.has-success{
+	background-color: green;
+}

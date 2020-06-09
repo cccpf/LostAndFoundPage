@@ -1,0 +1,11 @@
+/**
+*为submitNotice页面提供样式表
+*/
+
+.inputcomponent{
+    padding: 5px;
+}
+
+#noticeintro{
+    height:160px;
+}

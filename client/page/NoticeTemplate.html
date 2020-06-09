@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title id="noticetitle"></title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/NoticeTemplate.css" rel="stylesheet">  
+
+    <!-- 支持响应式布局 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3"></div>
+                <div class="col-md-6">
+                <h1 id="noticetitle">{标题}</h1>
+                  <div class="row">
+                    <div class="col">
+                      <div class="input-group mb-3">
+                        <img id="imgboard" alt="图片显示错误" id="imgdisplay">    
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <input class="btn btn-primary btn-block" id="previmg" type="submit" value="上一张">
+                        </div>
+                    </div>
+                    <div class="col">
+                      <div class="input-group mb-3">
+                          <input class="form-control" type="text" id="imgnum" value="1" disabled>
+                      </div>
+                  </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <input class="btn btn-primary btn-block" id="nextimg" type="submit" value="下一张">
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <p class="text-monospace" id="context">{内容}</p>   
+                  </div>
+                 
+                  <div class="row">
+                    <div class="col input-group mb-3">
+                      <input type="text" class="form-control" id="collectionnum" value="收藏数:{收藏}" disabled>
+                      <div class="input-group-append">
+                        <input type="submit" class="btn btn-success" id="collect" value="收藏">
+                      </div>
+                    </div>
+                    <div class="col input-group mb-3">
+                      <input class="btn btn-info btn-block" id="contact" type="submit" value="发起聊天">
+                    </div>
+                  </div>
+                 
+                </div>
+                <div class="col-md-3"></div>
+        </div>
+        
+    </div>
+</body>
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+
+<script>
+    let userPageUrl=/\/mainMenu.html\?id=.*psw=.*\//.exec($(location).attr("href"));
+    let imgarr=[{img_0}{img_1}{img_2}{img_3}{img_4}{img_5}{img_6}{img_7}{img_8}{img_9}];
+    let nowimg=0;
+    $(document).ready(function(){
+      refreshImg(imgarr[nowimg],nowimg+1);
+    });
+    $("#previmg").click(()=>{
+      const temp=nowimg-1;
+      if(temp>=0 && temp<imgarr.length){
+        nowimg--;
+        refreshImg(imgarr[nowimg],nowimg+1);
+      }else if(temp === -1){
+        nowimg=imgarr.length-1;
+        refreshImg(imgarr[nowimg],nowimg+1);
+      }
+    });
+
+    $("#nextimg").click(()=>{
+      const temp=nowimg+1;
+      if(temp>=0 && temp<imgarr.length){
+        nowimg++;
+        refreshImg(imgarr[nowimg],nowimg+1);
+      }else if(temp === imgarr.length){
+        nowimg=0;
+        refreshImg(imgarr[nowimg],nowimg+1);
+      }
+    });
+
+    $("#collect").click(()=>{
+      let formObject={};
+      formObject["userid"]=userPageUrl.toString().match(/id=(\S*)&psw=/)[1];
+      formObject["nid"]={nid};
+      $.ajax({
+          url:"setNoticeCollection",
+          type:"post",
+          contentType: "application/json; charset=utf-8",
+          data: JSON.stringify(formObject),
+          dataType: "json",
+          success:function(data){
+              if(data.isValid){
+                if(data.dealtype==="create"){
+                  alert("收藏成功");
+                  $("#collectionnum").attr("value","收藏数:"+data.nowcn);
+                }else if(data.dealtype==="delete"){
+                  alert("取消收藏成功");
+                  $("#collectionnum").attr("value","收藏数:"+data.nowcn);
+                }else{
+                  alert("收藏失败");
+                }
+              }else{
+                alert("连接服务器出现问题");
+              }
+          },
+          error:function(e){
+              alert("收藏失败");
+          }
+      });
+    });
+
+    $("#contact").click(()=>{
+      let formObject={};
+      formObject["userid"]=userPageUrl.toString().match(/id=(\S*)&psw=/)[1];
+      formObject["nid"]={nid};
+      if(formObject.userid===formObject.nid.split("_")[0]){
+        alert("您是拥有者，无法向自己请求对话");        
+      }else{
+        $.ajax({
+            url:"noticeConversation",
+            type:"post",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formObject),
+            dataType: "json",
+            success:function(data){
+                if(data.isValid){
+                  if(!data.hasConversation){
+                    alert("发起对话成功");
+                  }
+                  window.open(`${userPageUrl}conversation?nid=${formObject.nid}&u0_id=${data.ownerid}&u1_id=${formObject.userid}`,'_self');
+                }else{
+                  alert("连接服务器出现问题");
+                }
+            },
+            error:function(e){
+                alert("发起对话失败");
+            }
+        });
+      }
+
+    });
+
+    function refreshImg(base64,imgnum){
+      $("#imgboard").attr("src",base64);
+      $("#imgnum").attr("value",imgnum);
+    }
+</script>
+</html>
