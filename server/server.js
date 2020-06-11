@@ -8,7 +8,7 @@ const koastatic=require("koa-static");
 
 const gm=require("gm");
 const spawn = require('child_process').spawn; //提供生成node子进程的方法
-const GraphicsMagickPath="D:\\GraphicsMagick\\GraphicsMagick-1.3.35-Q16\\";    //按GraphicsMagick安装路径调整
+const GraphicsMagickPath="D:\\GraphicsMagick\\GraphicsMagick-1.3.35-Q16\\";
 
 
 const sequelize=require("sequelize");
@@ -18,7 +18,7 @@ const noticeinfodb=require("./createNoticeInfoDB");
 const noticecollectdb=require("./createNoticeCollectDB");
 const conversationdb=require("./createConversationDB");
 
-const host = '*******';     //ip地址
+const host = '192.168.88.105';
 const port = 6060;
 
 
@@ -293,6 +293,8 @@ server.on('request',function(req,res){
                                     }).then(cdata=>{
                                         if(cdata[0]!=null){
                                             getNoticeFromCollectionName(0,cdata,data,mycollectionnum,res,userpageurl);
+                                        }else{
+                                            res.end(data);
                                         }
                                     })
                                 });
@@ -1203,7 +1205,8 @@ server.on('request',function(req,res){
                 conversationdb.findAll({
                     where:{
                         nid:query.nid,
-                        userid:query.userid
+                        userid:query.userid,
+                        ownerid:query.userid_1
                     }
                 }).then((data)=>{
                     if(data[0]!=null){
@@ -1215,7 +1218,8 @@ server.on('request',function(req,res){
                     conversationdb.findAll({
                         where:{
                             nid:query.nid,
-                            ownerid:query.userid
+                            ownerid:query.userid,
+                            userid:query.userid_1
                         }
                     }).then((data)=>{
                         if(data[0]!=null){
@@ -1247,7 +1251,8 @@ server.on('request',function(req,res){
                 conversationdb.findAll({
                     where:{
                         nid:query.nid,
-                        userid:query.userid
+                        userid:query.userid,
+                        ownerid:query.userid_1
                     }
                 }).then((data)=>{
                     if(data[0]!=null){
@@ -1257,7 +1262,8 @@ server.on('request',function(req,res){
                         },{
                             where:{
                                 nid:query.nid,
-                                userid:query.userid
+                                userid:query.userid,
+                                ownerid:query.userid_1
                             }
                         }).then(()=>{
                             retdata["submitsuccess"]=true;
@@ -1269,7 +1275,8 @@ server.on('request',function(req,res){
                     conversationdb.findAll({
                         where:{
                             nid:query.nid,
-                            ownerid:query.userid
+                            ownerid:query.userid,
+                            userid:query.userid_1
                         }
                     }).then((data)=>{
                         if(data[0]!=null){
@@ -1279,7 +1286,8 @@ server.on('request',function(req,res){
                             },{
                                 where:{
                                     nid:query.nid,
-                                    ownerid:query.userid
+                                    ownerid:query.userid,
+                                    userid:query.userid_1
                                 }
                             }).then(()=>{
                                 retdata["submitsuccess"]=true;
