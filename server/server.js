@@ -753,6 +753,59 @@ server.on('request',function(req,res){
      
         });
         }
+        else if(findNoticeByKey(lurl)){
+            const key=lurl.split("=")[1];
+            let noticekey=[]; 
+            let userpageurl="";
+            for(let i=0;i<urlarr.length-1;i++){
+                userpageurl+=(urlarr[i]+"/");
+            }  
+            noticeinfodb.findAll({
+                where:{
+                    userid:key
+                }
+            }).then((data)=>{
+                if(data[0]!=null){
+                    for(let i=0;i<data.length;i++){
+                        noticekey.push(data[i].dataValues.id);
+                    }
+                }
+                noticeinfodb.findAll({
+                    where:{
+                        title:key
+                    }
+                }).then((data)=>{
+                    if(data[0]!=null){
+                        let isInclude=false;
+                        for(let i=0;i<noticekey.length;i++){
+                            if(key===noticekey[i]){
+                                isInclude=true;
+                            }
+                        }   
+                        if(!isInclude){
+                            noticekey.push(data[0].dataValues.id);
+                        }
+                    }
+                    res.writeHead(200,{'Content-Type':'text/html'});
+                    fs.readFile('../client/page/FindNoticeByKey.html','utf-8',function(err,data){
+                        if(err){
+                            throw(err);
+                        }
+                        let resulttemplate="";
+                        
+                        for(let i=0;i<Math.ceil(noticekey.length/3);i++){
+                            resulttemplate+=createMyCollectionRowTemplate(i,false);
+                        }
+                        data=data.replace(new RegExp('{result}','g'),resulttemplate);
+
+                        createNoticeByKey(noticekey,0,noticekey.length,data,res,userpageurl);
+                    });
+                    
+                });
+            }).catch((err)=>{
+                console.error(err);
+            })
+        }
         else if(isNotice(lurl)){
             //处理进入告示界面请求
         const nid=lurl.split("=")[1];
@@ -1360,6 +1413,13 @@ function isMainMenu(filename){
     
     return false;
 }
+function findNoticeByKey(filename){
+    let resarr=filename.split("=");
+    if(resarr.length==2 && resarr[0]==="findkey"){
+        return true;
+    }
+    return false;
+}
 
 function isNotice(filename){
     let resarr=filename.split("=");
@@ -1490,10 +1550,32 @@ function createMyConversationListTemplate(url,nid,oid,uid){
     return '<li class="list-group-item" onclick="window.open('+url+')">'+`告示名称：${nid}  拥有人：${oid}  对话者：${uid}`+'</li>';
 }
 
+function createNoticeByKey(keyarr,count,max,data,res,userpageurl){
+    if(count<max){
+        row=Math.floor(count/3);
+        col=count%3;
+        noticeinfodb.findAll({
+            where:{
+                id:keyarr[count]
+            }
+        }).then((ndata)=>{
+            if(ndata[0]!=null){
+                data=data.replace(new RegExp('{cr'+row+'-c'+col+'-图片}','g'),ndata[0].dataValues.titlepage!=null?ndata[0].dataValues.titlepage.split(".")[1]==="png"?pngToBase64(ndata[0].dataValues.titlepage):jpegToBase64(ndata[0].dataValues.titlepage):jpegToBase64(defaultimg));
+                data=data.replace(new RegExp('{cr'+row+'-c'+col+'-标题}','g'),ndata[0].dataValues.title==null?"无标题":ndata[0].dataValues.title);
+                data=data.replace(new RegExp('{cr'+row+'-c'+col+'-介绍}','g'),ndata[0].dataValues.intro==null?"无内容":ndata[0].dataValues.intro);
+                data=data.replace(new RegExp('{cr'+row+'-c'+col+'-onclick}','g'),ndata[0].dataValues==null?"":"'"+userpageurl+"nid="+ndata[0].dataValues.id+"'");
+                createNoticeByKey(keyarr,count+1,max,data,res,userpageurl);
+            }
+        })
+    }else{
+        res.end(data);
+    }
+}
+
 function getNoticeFromCollectionName(count,cdata,data,max,res,userpageurl){
     if(count<max){
         row=Math.floor(count/3);
-        col=count%3;console.log(row+"-"+col);
+        col=count%3;
         noticeinfodb.findAll({
             where:{
                 id:cdata[count].dataValues.nid
